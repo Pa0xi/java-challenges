@@ -140,9 +140,4 @@ java App
 
 ---
 
-## 🔥 Next step (recommended)
-After adding this file:
-```bash
-git add README.md
-git commit -m "Add complete README for Java challenges"
-git push
+
