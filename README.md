@@ -1,4 +1,4 @@
-# Java Challenges 🚀
+[[# Java Challenges 🚀
 
 This repository contains a collection of **Java mini-projects and challenges** created as part of my journey to strengthen my **Java fundamentals**, **problem-solving skills**, and **coding best practices**.
 
@@ -141,3 +141,4 @@ java App
 ---
 
 
+](https://github.com/Pa0xi/java-challenges.git)](https://github.com/Pa0xi/java-challenges.git)
