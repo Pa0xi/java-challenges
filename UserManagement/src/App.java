@@ -1,17 +1,30 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.*;
 public class App {
     public static void main(String[] args) throws Exception {
         Scanner sc = new Scanner(System.in);
+        String filePath = "UserManagement\\src\\Users.txt";
         ArrayList<User> users = new ArrayList<>();
+        BufferedReader reader = new BufferedReader(new FileReader(filePath));
+        String line ;
+        String[] word;
+        while((line = reader.readLine()) != null){
+            word = line.split(",");
+            int id = Integer.parseInt(word[0]);
+            users.add(new User(id,word[1],word[2]));
+        }
         System.out.println("***Welcome to User Management***");
         boolean exit = false;
         while (!exit) {
             int choice = 0;
-            System.out.println("=======================");
-            System.out.println("1. ADD USER");
-            System.out.println("2. DELETE USER");
-            System.out.println("3. SHOW USERS");
-            System.out.println("4. EXIT");
+            System.out.println(" ______________");
+            System.out.println("|1. ADD USER   |");
+            System.out.println("|2. DELETE USER|");
+            System.out.println("|=3. SHOW USERS|");
+            System.out.println("|=4. EXIT      |");
+            System.out.println("|______________|");
             System.out.print("Ur choice: ");
             try {
                 choice = Integer.parseInt(sc.nextLine());
@@ -75,6 +88,17 @@ public class App {
                     break;
                 case 4:
                     exit = true;
+                    try(FileWriter writer = new FileWriter(filePath)){
+
+                        while((line = reader.readLine())==null){
+                            for (User u : users) {
+                                writer.write(u.getId()+","+u.name+","+u.email+"\n");
+                            }
+                            break;
+                        }
+                    }catch(EmptyStackException e){
+                        System.out.println("error");
+                    }
                     System.out.println("Exiting User Management System...");
                     break;
                 default:

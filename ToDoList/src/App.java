@@ -10,7 +10,7 @@ import java.io.FileWriter;
 
 public class App {
     public static void main(String[] args) throws Exception {
-        String filePath = "ToDoList\\src\\Task.txt";
+        String filePath = "src\\Task.txt";
         ArrayList<Task> tasks = new ArrayList<>();
         BufferedReader buffer = new BufferedReader(new FileReader(filePath));
         
@@ -125,9 +125,7 @@ public class App {
                 case 5:
                     exit = true;
                     try (FileWriter writer = new FileWriter(filePath)) {
-                            while((readStrings = buffer.readLine()) != null) {
-                                continue;
-                            }
+                            
                             while((readStrings = buffer.readLine()) == null) {
                                 for (Task task2 : tasks) {
                                     writer.write(task2.getName()+","+task2.getState());
