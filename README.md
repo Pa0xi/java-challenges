@@ -28,16 +28,16 @@ Each challenge is organized in its own folder:
 
 java-challenges/
 │
-\n├── challenge-1/
-\n├── challenge-2/
-\n├── challenge-3/
-\n├── challenge-4-array-reverse-search/
-\n├── challenge-6-calculator/
-\n├── challenge-8-todo-list/
-\n├── challenge-9-word-counter/
-\n├── challenge-10-user-management/
-\n│
-\n└── README.md
+├── challenge-1/
+├── challenge-2/
+├── challenge-3/
+├── challenge-4-array-reverse-search/
+├── challenge-6-calculator/
+├── challenge-8-todo-list/
+├── challenge-9-word-counter/
+├── challenge-10-user-management/
+│
+└── README.md
 
 
 ---
