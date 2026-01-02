@@ -1,10 +1,29 @@
 import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 public class App {
     public static void main(String[] args) throws Exception {
+        String filePath = "ToDoList\\src\\Task.txt";
         ArrayList<Task> tasks = new ArrayList<>();
+        ArrayList<Task> tempArray = new ArrayList<>();
+        BufferedReader buffer = new BufferedReader(new FileReader(filePath));
+        
+        String readStrings;
+        String[] readArray;
+        while ((readStrings = buffer.readLine()) != null) {
+                readArray = readStrings.split(" ");
+                tasks.add(new Task(readArray[0], readArray[1]));
+            }
+        
         Scanner sc = new Scanner(System.in);
         System.out.println("Welcome to to-do List");
         boolean exit = false;
@@ -108,6 +127,21 @@ public class App {
                     break;
                 case 5:
                     exit = true;
+                    try (FileWriter writer = new FileWriter(filePath)) {
+                            while((readStrings = buffer.readLine()) != null) {
+                                continue;
+                            }
+                            while((readStrings = buffer.readLine()) == null) {
+                                for (Task task2 : tasks) {
+                                    writer.write(task2.getName()+" "+task2.getState());
+                                    writer.write("\n");
+                                }
+                                break;
+                            }
+                        
+                        } catch (Exception e) {
+                            System.err.println("err ");
+                        }
                     break;
                 default:
                     System.out.println("invalid input !!");
