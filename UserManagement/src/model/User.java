@@ -1,3 +1,4 @@
+package model;
 import java.util.*;
 
 public class User {
@@ -22,6 +23,12 @@ public class User {
     public boolean checkId(int input){
         return this.id == input;
     }
+    public String getName(){
+        return this.name;
+    }
+    public String getEmail(){
+        return this.email;
+    }
 
     public void saisir(Scanner sc){
         System.out.print("Ur id: ");
@@ -30,7 +37,7 @@ public class User {
             this.id = Integer.parseInt(sc.nextLine());
             break;
         } catch (NumberFormatException e) {
-            System.out.println("Try an integer");
+            System.out.print("Try an integer: ");
         }
         }
         System.out.print("Ur name: ");

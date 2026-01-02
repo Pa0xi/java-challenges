@@ -2,103 +2,46 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.*;
+import Storage.UserFileStorage;
+import UI.Menu;
+import model.User;
+import Service.UserService;;
 public class App {
     public static void main(String[] args) throws Exception {
         Scanner sc = new Scanner(System.in);
         String filePath = "UserManagement\\src\\Users.txt";
-        ArrayList<User> users = new ArrayList<>();
-        BufferedReader reader = new BufferedReader(new FileReader(filePath));
-        String line ;
-        String[] word;
-        while((line = reader.readLine()) != null){
-            word = line.split(",");
-            int id = Integer.parseInt(word[0]);
-            users.add(new User(id,word[1],word[2]));
-        }
+        Menu menu = new Menu();
+        UserFileStorage storage = new UserFileStorage(filePath);
+        ArrayList<User> users = new ArrayList<>(storage.loadUsers());
+        UserService service = new UserService(users);
         System.out.println("***Welcome to User Management***");
         boolean exit = false;
         while (!exit) {
             int choice = 0;
-            System.out.println(" ______________");
-            System.out.println("|1. ADD USER   |");
-            System.out.println("|2. DELETE USER|");
-            System.out.println("|=3. SHOW USERS|");
-            System.out.println("|=4. EXIT      |");
-            System.out.println("|______________|");
-            System.out.print("Ur choice: ");
+            menu.show();
             try {
                 choice = Integer.parseInt(sc.nextLine());
             } catch (NumberFormatException e) {
                 System.err.println("Please Enter An Integer!!!");
                 
             }
-            boolean found = false;
             switch (choice) {
                 case 1:
-                    found = false;
-                    User user = new User();
-                    user.saisir(sc);
-                    for (User u : users) {
-                        if (u.getId() == user.getId()) {
-                            found = true;
-                        }
-                    }
-                    if (!found) {
-                        users.add(user);
-                        System.out.println("User created successfully!!!");
-                    }else{
-                        System.out.println("We have user with this ID: "+user.getId());
-                    }
+                    service.addUser();
                     break;
                 case 2:
                     if (users.size() != 0) {
-                        System.out.print("Enter the user id: ");
-                        int id = 0;
-                        while(true){
-                            try {
-                            id = Integer.parseInt(sc.nextLine());
-                            break;
-                        } catch (NumberFormatException e) {
-                            System.out.println("Id should be integer");
-                        }
-                        }
-                        for (int i = 0 ; i < users.size(); i++) {
-                            if(id == (users.get(i)).getId()){
-                                found = true;
-                                users.remove(i);
-                                System.out.println("User deleted successsfully !");
-                                break;
-                            }
-                        }
-                        if (!found) {
-                            System.out.println("No user found for id: "+id);
-                        }
+                    service.deleteUser(menu.inputId());
                     }else{
                         System.out.println("There is no User !!!");
                     }
                     break;
                 case 3:
-                    if (users.size() != 0) {
-                        for (User u3 : users) {
-                            System.out.println(u3.afficher());
-                        }
-                    }else{
-                        System.out.println("There is no User !!!");
-                    }
+                    service.getAllUsers();
                     break;
                 case 4:
                     exit = true;
-                    try(FileWriter writer = new FileWriter(filePath)){
-
-                        while((line = reader.readLine())==null){
-                            for (User u : users) {
-                                writer.write(u.getId()+","+u.name+","+u.email+"\n");
-                            }
-                            break;
-                        }
-                    }catch(EmptyStackException e){
-                        System.out.println("error");
-                    }
+                    storage.saveUser(users);
                     System.out.println("Exiting User Management System...");
                     break;
                 default:
