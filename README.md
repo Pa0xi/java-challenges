@@ -26,18 +26,20 @@ Learning Java, Backend Development, and Software Engineering fundamentals.
 
 Each challenge is organized in its own folder:
 
-java-challenges/
-│
-├── challenge-1/
-├── challenge-2/
-├── challenge-3/
-├── challenge-4-array-reverse-search/
-├── challenge-6-calculator/
-├── challenge-8-todo-list/
-├── challenge-9-word-counter/
-├── challenge-10-user-management/
-│
-└── README.md
+- java-challenges/
+- │
+- ├── challenge-1-banking-system/
+- ├── challenge-2-grades/
+- ├── challenge-3-multiplication/
+- ├── challenge-4-number-analyzer/
+- ├── challenge-5-array-reverse-search/
+- ├── challenge-6-stock-management/
+- ├── challenge-7-todo-list/
+- ├── challenge-6-calculator/
+- ├── challenge-9-user-management/
+- ├── challenge-10-word-counter/
+- │
+- └── README.md
 
 
 ---
@@ -67,6 +69,33 @@ java-challenges/
 - Basic arithmetic operations
 - Exception handling (`try / catch`)
 - Loop-based user interaction
+
+---
+
+## 🏦 Bank Account Management System 
+
+A console-based Java application that simulates basic banking operations.
+The project focuses on practicing Object-Oriented Programming (OOP) concepts and implementing real-world logic using a menu-driven interface.
+
+**Features:**
+- User authentication (name & password)
+- Deposit and withdrawal operations
+- Balance validation
+- Display account information
+- Multiple accounts managed using collections
+- Concepts Used
+- Java OOP (classes, encapsulation, constructors)
+- ArrayList collections
+- Conditional logic and loops
+- User input handling with Scanner
+
+**Purpose**
+- Built as a Java practice project to strengthen OOP fundamentals and improve problem-solving skills.
+- Future Improvements
+- Secure password handling
+- Data persistence (file or database)
+- Account transfers
+- Improved error handling
 
 ---
 
