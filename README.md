@@ -157,17 +157,3 @@ cd challenge-8-todo-list
 javac App.java
 java App
 
-
-
----
-
-## ✅ What this README does for you
-✔ Looks **professional**  
-✔ Shows **progression & learning mindset**  
-✔ Perfect for **recruiters / teachers**  
-✔ Fits your current Java level (not fake senior stuff)
-
----
-
-
-](https://github.com/Pa0xi/java-challenges.git)](https://github.com/Pa0xi/java-challenges.git)
