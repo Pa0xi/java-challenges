@@ -1,3 +1,4 @@
+package model;
 import java.util.Scanner;
 
 public class Task {
@@ -8,8 +9,9 @@ public class Task {
         this.name = name;
         this.state = state;
     }
+
+    public Task(){}
     public void saisir(Scanner sc){
-        sc.nextLine();
         System.out.print("Saisie le nom: ");
         this.name = sc.nextLine();
         System.out.print("Saisie l'état: ");
