@@ -1,96 +1,66 @@
 import java.util.*;
+import ui.BankMenu;
+import model.Account;
+import service.AccountGestion;
+import service.UserGestion;
+import storage.InfoSave;
 
 public class App {
     public static void main(String[] args) throws Exception {
         try (Scanner sc = new Scanner(System.in)) {
-            Accounts account1 = new Accounts("Mouaad", 1000, 1234);
-            Accounts account2 = new Accounts("Doha", 500,1234);
-            ArrayList<Accounts> accountsList = new ArrayList<>();
-            Accounts ConnectedAccount = null;
-            boolean found = false;
-            boolean authenticated = false;
+            InfoSave infoSave = new InfoSave("src\\Users.txt");
+            BankMenu menu = new BankMenu();
+            ArrayList<Account> accountsList = new ArrayList<>(infoSave.loadUsers());
+            UserGestion userGestion = new UserGestion(accountsList);
+            AccountGestion accountGestion = new AccountGestion();
             boolean exit = false;
             boolean globalExit = false;
-            accountsList.add(account1);
-            accountsList.add(account2);
             System.out.println("Welcome to the Banking System");
             while (!globalExit) {
-                found = false;
-                authenticated = false;
-                ConnectedAccount = null;
+                Account ConnectedAccount = null;
                 exit = false;
-
-                System.out.println("1. Login");
-                System.out.println("2. Exit");
-                System.out.print("Choose an option: ");
-                int mainChoice = 0;
-                try {
-                    mainChoice = sc.nextInt();
-                } catch (Exception e) {
-                    System.out.print("Error try again: ");
-                    sc.next();
-                }
-                sc.nextLine(); 
+                int mainChoice = menu.login(sc);
                 if(mainChoice == 1){
-                    System.out.print("Enter owner name: ");
-            String ownerName = sc.nextLine();
-            for(Accounts account : accountsList) {
-                if(account.getownerName().equals(ownerName)) {
-                    found = true;
-                    System.out.print("Enter password:");
-                    int password = sc.nextInt();
-                    if(account.checkPassword(password)) {
-                        ConnectedAccount = account;
-                        authenticated = true;
-                        break;
-                    }else {
-                        System.out.println("Incorrect password.");
-                        authenticated = false;
-                    }
-                }
-                
-            }
-            
-            if(found && authenticated) {
+                    ConnectedAccount = userGestion.login(sc);
+            if(ConnectedAccount != null) {
                 while(!exit){
-                    System.out.println("Welcome, " + ConnectedAccount.getownerName());
-                    System.out.println("1. Deposit\n2. Withdraw\n3. Display Info\n4. Exit");
-                    System.out.print("Choose an option: ");
-                    int choice = sc.nextInt();
+                    int choice = menu.choic(ConnectedAccount, sc);
                     switch(choice){
                         case 1:
-                            System.out.print("Enter ur deposit amount: ");
-                            double depositAmount = sc.nextDouble();
-                            ConnectedAccount.deposit(depositAmount);
+                            accountGestion.deposit(ConnectedAccount, sc);
                             break;
-                            case 2:
-                                System.out.print("Enter ur withdraw amount: ");
-                                double withdrawAmount = sc.nextDouble();
-                                ConnectedAccount.withdraw(withdrawAmount);
-                                break;
-                                case 3:
-                                    ConnectedAccount.displayInfo();
-                                    break;
-                                    case 4:
-                                        exit = true;
-                                        break;
-                                    }
-                                }
-                            }else if (!found) {
-                                System.out.println("Account not found.");
+                        case 2:
+                            accountGestion.withdraw(ConnectedAccount, sc);
+                            break;
+                        case 3:
+                            ConnectedAccount.displayInfo();
+                            break;
+                        case 4:
+                                exit = true;
+                            break;
+                        default:
+                            System.out.println("Enter a number between(1-4)!!!");
+                            break;
                             }
-                            
+                    }
+                }
                 }else if(mainChoice == 2){
+                    userGestion.addAccount(sc);
+                }
+                else if(mainChoice == 3){
                     globalExit = true;
                 }else{
-                    System.out.println("Invalid option. Please try again.");
+                    System.out.println("Try a 1 or 2 or 3!!");
                     continue;
                 }
                         }
                             System.out.println("Exiting the system.");
+                            infoSave.saveUser(accountsList);
             
         }catch(Exception e){
             System.out.println("An error occurred: " + e.getMessage());
         }
+        
 }
+
 }

@@ -1,13 +1,15 @@
-public class Accounts {
+package model;
+public class Account {
     private String ownerName;
     private double Balance;
     private int password;
 
-    public Accounts(String ownerName, double initialBalance, int password) {
+    public Account(String ownerName, double initialBalance, int password) {
         this.ownerName = ownerName;
         this.Balance = initialBalance;
         this.password = password;
     }
+    public Account(){}
     
 
     public String getownerName() {
@@ -15,6 +17,9 @@ public class Accounts {
     }
     public double getBalance() {
         return Balance;
+    }
+    public int getPassword(){
+        return this.password;
     }
     public boolean checkPassword(int input) {
         return password == input;
