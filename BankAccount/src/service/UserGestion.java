@@ -76,6 +76,9 @@ public class UserGestion {
                     }
                 }
             }
+            if (!found) {
+                System.out.println("No user match this name!!");
+            }
             return ConnectedAccount;
         }
 }
